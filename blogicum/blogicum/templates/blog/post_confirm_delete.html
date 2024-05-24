@@ -1,0 +1,28 @@
+
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% block content %}
+  <h1>Удалить запись {{ object.pk }}</h1>
+  <div class="card col-4 m-3">
+    <div class="card-header">
+    <h4>
+      <p class="text-danger"><b>Вы уверены, что хотите удалить cвой пост?</b></p>
+    </h4>
+      {% if not post.is_published %}
+      <p><b>Он еще не опубликован.</b></p>
+      {% else %}
+      <p><p><b>Он уже опубликован.</b></p>
+      {% endif %}
+    </small>
+  </h6>
+  <p class="card-text">Дата публикации: {{ post.pub_date|date:"d E Y, H:i" }}</p>
+  <p class="card-text">Текст поста: {{ post.text }}</p>
+    </div>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        {% bootstrap_button button_type="submit" content="Удалить" %}
+      </form>
+    </div>
+  </div>
+{% endblock content %}
